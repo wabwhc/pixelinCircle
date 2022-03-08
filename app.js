@@ -8,10 +8,12 @@ class app{
         this.resize();
 
         this.dots = [];
-
+        //dot의 크기
         this.radius = 4;
         this.pixelSize = this.radius * 2;
 
+
+        //이미지에 대한 정보
         this.imgPos = {
             x: 0,
             y: 0,
@@ -28,7 +30,9 @@ class app{
          
         window.addEventListener('resize', this.resize.bind(this));
 
+        //마우스를 중심으로 이동
         this.canvas.addEventListener('mousemove', (e) => this.drawInCircle(e));
+        //휠로 dot크기 조절
         this.canvas.addEventListener('wheel', (e) => {
             if(e.deltaY <= -100){
                 this.radius += 1;
@@ -59,6 +63,7 @@ class app{
     }
 
     drawImage(){
+        //이미지 크기 조절
         this.stageRatio = this.width / this.height;
         this.imgRatio = this.image.width / this.image.height;
 
@@ -80,6 +85,7 @@ class app{
                 (this.height - this.imgPos.height) / 2
             );
         }
+        //이미지 그리기
         this.ctx.drawImage(
             this.image,
             0, 0,
@@ -87,12 +93,16 @@ class app{
             this.imgPos.x, this.imgPos.y,
             this.imgPos.width, this.imgPos.height,
         );
+        //이미지의 색 가져오기
         this.imgData = this.ctx.getImageData(this.imgPos.x, this.imgPos.y, this.imgPos.width, this.imgPos.height);
+        //이미지는 지움
         this.ctx.clearRect(0, 0, this.width, this.height);
+        //dot만들기
         this.makedot();
     }
 
     makedot(){
+        //this.col, this.row dot 위치
         this.col = Math.ceil(this.imgPos.width / this.pixelSize);
         this.row = Math.ceil(this.imgPos.height / this.pixelSize);
         for(let i = 0; i < this.row; i++){
@@ -121,8 +131,10 @@ class app{
 
     drawInCircle(e){
         this.ctx.clearRect(0, 0, this.width, this.height);
+        //보여줄 크기 조절
         let eCircle = this.imgPos.width > this.imgPos.height ? this.imgPos.height / 5 : this.imgPos.width / 5; 
         let pixelDistance = Math.ceil(eCircle / this.pixelSize);
+        //마우스 위치 계산
         let ex = 0;
         let ey = 0;
         let Eindex = 0;
