@@ -39,7 +39,7 @@ class app{
                 this.pixelSize = this.radius * 2;
                 this.resize();
             }else if(e.deltaY >= 100){
-                if(this.radius !== 2){
+                if(this.radius !== 3){
                     this.radius -= 1;
                     this.pixelSize = this.radius * 2;
                     this.resize();
