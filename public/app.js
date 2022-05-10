@@ -2,8 +2,11 @@ import dot from "./dot.js";
 
 class app{
     constructor(){
+        console.log(1)
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
+        this.filename = document.getElementsByClassName('tag')[0].id
+        console.log(this.filename)
         document.body.appendChild(this.canvas);
         this.resize();
 
@@ -22,7 +25,7 @@ class app{
         }
         this.isLoaded = false;
         this.image = new Image();
-        this.image.src = 'jstreet6.jpg';
+        this.image.src = '../uploads/'+this.filename;
         this.image.onload = () => {
             this.isLoaded = true;
             this.drawImage();
